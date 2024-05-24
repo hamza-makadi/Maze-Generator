@@ -1,4 +1,4 @@
-import pygame, sys, Cell, random
+import pygame, sys, Cell, random, pickle
 from const import *
 
 def GetIndex(i,j):
@@ -78,5 +78,4 @@ class cell:
 		#LEFT WALL
 		if(self.walls[3]):
 			pygame.draw.line(screen, (255,255,255), (x			, y + CELL_SIZE), (x			, y             ), 1)
-
 
