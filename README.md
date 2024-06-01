@@ -29,7 +29,7 @@ This project is a Pygame application that generates random mazes using the depth
    - Use the arrow keys to navigate through the maze.
 
 4. **Changing Seed**
-   - Press the 'S' key to change the seed for generating a different maze.
+   - Press the 'GENERATE' key to change the seed for generating a different maze.
    - Enter the new seed value when prompted.
 
 5. **Saving and Loading Mazes**
