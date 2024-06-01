@@ -26,16 +26,15 @@ This project is a Pygame application that generates random mazes using the depth
    
 3. **Generating and Displaying Mazes**
    - Upon running the application, a random maze will be generated and displayed on the Pygame window.
-   - Use the arrow keys to navigate through the maze.
 
 4. **Changing Seed**
    - Press the 'GENERATE' key to change the seed for generating a different maze.
-   - Enter the new seed value when prompted.
+   - Enter the new seed value.
 
 5. **Saving and Loading Mazes**
-   - Press the 'SAVE' keys to save the current maze as a `.maze` file.
-   - Press the 'LOAD' keys to load a saved `.maze` file.
-   - Specify the file path of the `.maze` file when prompted.
+   - Press the 'SAVE' button to save the current maze as a `.maze` file.
+   - Press the 'LOAD' button to load a saved `.maze` file.
+   - Specify the file path of the `.maze` file.
 
 ## File Format (.maze)
 - The `.maze` file contains JSON data with the following structure:
@@ -56,7 +55,7 @@ This project is a Pygame application that generates random mazes using the depth
   - `walls`: Array representing the walls of the cell in the order [top, right, bottom, left]. Each value is a boolean indicating whether the corresponding wall exists (True) or not (False).
 
 ## Dependencies
-- Python 3.x
+- Python 3.10
 - Pygame
 
 ## Credits
@@ -66,7 +65,3 @@ For more information, visit the project repository https://github.com/hamza-make
 
 ## Feedback and Contributions
 Feedback and contributions are welcome! If you have any suggestions or would like to contribute to the project, feel free to open an issue or submit a pull request on the project repository.
-
----
-
-Feel free to customize this README file according to your project's specific details and requirements!
