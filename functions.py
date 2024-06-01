@@ -35,17 +35,21 @@ def drawCell(cell):
 		pygame.draw.line(screen, (255,255,255), (x			, y + CELL_SIZE), (x			, y             ), 1)
 
 def load_maze_from_file(file_name):
-	with open(f'{file_name}', 'rb') as file:
-		loaded_maze = pickle.load(file)
+	try:
+		with open(f'{file_name}', 'rb') as file:
+			loaded_maze = pickle.load(file)
 
-	return loaded_maze
+		return loaded_maze
+	except Exception as err:
+		print(err)
+		return None
 
 def save_maze_to_file(grid ,file_name,seed):
 	if file_name=="":
 		file_name = str(seed)
-	maze = [seed]
+	maze = {"seed":seed,"maze":[]}
 	for cell in grid:
-		maze.append(
+		maze["maze"].append(
         	{
 	        	"i":cell.i,
 	            "j":cell.j,
@@ -54,7 +58,7 @@ def save_maze_to_file(grid ,file_name,seed):
             )
 	with open(f'{file_name}.maze', 'wb') as file:
 		pickle.dump(maze, file)
-	print(f"Maza has been saved at {file_name}.dat")
+	print(f"Maza has been saved at {file_name}.maze")
 
 class Button:
     def __init__(self, x, y, image_path=None,resize=False, font=pygame.font.Font(None, 36), width=None, height=None, text="", font_size=30, text_color=(255, 255, 255), background_color=(255,0,0)):

@@ -10,7 +10,6 @@ seed = seed_time & ((1 << 32) - 1)
 grid = []
 stack = []
 
-
 #Initialize the grid
 for j in range(ROWS):
     for i in range(COLS):
@@ -18,19 +17,18 @@ for j in range(ROWS):
 
 current_cell = grid[0]
 
-
 done = 0
 
 # Buttons
-save_maze_button = Button( x = WIDTH-170, y = HEIGHT-40, width=145, height=40, text="SAVE", background_color=(200,0,105))
-file_to_save_input = Input(x = 10, y = HEIGHT-40, width=550, height=40, placeholder="File name")
+save_maze_button = Button( x = WIDTH-170, y = HEIGHT-60, width=145, height=40, text="SAVE", background_color=(200,0,105))
+file_to_save_input = Input(x = 10, y = HEIGHT-60, width=550, height=40, placeholder="File name")
 
-generate_maze_button = Button( x = WIDTH-170, y = HEIGHT-100, width=145, height=40, text="GENERATE", background_color=(200,0,105))
-seed_input = Input(x = 10, y = HEIGHT-100, width=550, height=40, placeholder=f"{seed}")
+generate_maze_button = Button( x = WIDTH-170, y = HEIGHT-120, width=145, height=40, text="GENERATE", background_color=(200,0,105))
+seed_input = Input(x = 10, y = HEIGHT-120, width=550, height=40, placeholder=f"{seed}")
 seed_input.input_text = str(seed)
 
-load_maze_button = Button( x = WIDTH-170, y = HEIGHT-160, width=145, height=40, text="LOAD", background_color=(200,0,105))
-maze_input = Input(x = 10, y = HEIGHT-160, width=550, height=40, placeholder="Maze path")
+load_maze_button = Button( x = WIDTH-170, y = HEIGHT-180, width=145, height=40, text="LOAD", background_color=(200,0,105))
+maze_input = Input(x = 10, y = HEIGHT-180, width=550, height=40, placeholder="Maze path")
 
 # Game loop
 running = True
@@ -42,7 +40,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+        maze_input.handle_input(event)
         file_to_save_input.handle_input(event)
         seed_input.handle_input(event)
 
@@ -80,21 +78,21 @@ while running:
     if load_maze_button.is_clicked(mouse_pos):
         generate_maze = False
         loaded_maze = True
-        path = get_file_path()
+        if maze_input.input_text=="":
+            path = get_file_path()
+        else:
+            path = maze_input.input_text
+            
         if path!=None:
             loaded_grid = load_maze_from_file(path)
         else:
             seed_input.input_text = "Path does not exist!"
-    if loaded_maze:
 
-        first_iteration = True
-        for loaded_cell in loaded_grid:
-            if first_iteration:
-                first_iteration = False
-                seed_input.input_text = loaded_cell
-            else:
-                drawCell(loaded_cell)
-    if generate_maze or done==2:
+    if loaded_maze:
+        seed_input.input_text = loaded_grid["seed"]
+        for loaded_cell in loaded_grid["maze"]:
+            drawCell(loaded_cell)
+    if (generate_maze or done==2) and not(loaded_maze):
         for cell in grid:
             cell.drawCell()
 
@@ -131,7 +129,7 @@ while running:
     pygame.display.flip()  # Update the display
 
     # Cap the frame rate
-    pygame.time.Clock().tick(6000)
+    pygame.time.Clock().tick(60)
 
 # Quit Pygame
 pygame.quit()

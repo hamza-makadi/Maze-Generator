@@ -2,7 +2,7 @@ import pygame, sys, Cell, random
 # Set up some constante
 
 CELL_SIZE = 30
-PADDING = 5
+PADDING = 6
 WIDTH, HEIGHT = 751, 500+(CELL_SIZE*PADDING)
 COLS, ROWS = WIDTH//CELL_SIZE , HEIGHT//CELL_SIZE-PADDING
 
